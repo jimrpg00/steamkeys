@@ -1,15 +1,15 @@
 import discord
 from discord.ext import commands
 
-class ListGames(commands.Cog):
+class ListGames(commands.Cog, description="Shows the entire list of games with valid keys. "):
 
     def __init__(self, client):
         self.client = client
+        self.db = self.client.firestoreDb
 
-    @commands.command()
+    @commands.command(brief="Lists available games with valid keys")
     async def listgames(self, ctx):
-        print("list games from cogs")
-        doc_refs = db.collection('game_list').stream()
+        doc_refs = self.db.collection('game_list').stream()
         appendedGamesStr = ""
 
         for doc in doc_refs:
@@ -20,7 +20,7 @@ class ListGames(commands.Cog):
             formattedTitle = doc.id.capitalize()
             appendedGamesStr = appendedGamesStr + (f'{formattedTitle}\n')
         await ctx.channel.send("Listing the steam key depository..")
-        await ctx.channel.send(appendedGamesStr)
+        await ctx.channel.send(f"""```{appendedGamesStr}```""")
 
 def setup(client):
     client.add_cog(ListGames(client))
