@@ -8,7 +8,7 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
         self.client = client
         self.db = self.client.firestoreDb
 
-    @commands.command(brief="add a key into the database for others (use DM)")
+    # @commands.command(brief="add a key into the database for others (use DM)")
     async def addkey(self, ctx, game_title, platform, region, key):
             
         #regex to check the format

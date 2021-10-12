@@ -26,7 +26,8 @@ initial_extensions = []
 intents = discord.Intents.default()
 intents.members = True
 
-client = commands.Bot(command_prefix='!')
+client = commands.Bot(command_prefix='!',help_command=None)
+
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 client.help_command = MyHelp()
 cred = firebase_admin.credentials.Certificate('serviceAccountJ.json')
