@@ -27,7 +27,7 @@ intents = discord.Intents.default()
 intents.members = True
 
 client = commands.Bot(command_prefix='!',help_command=None)
-client = client.remove_command('help')
+client.remove_command('help')
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 # client.help_command = MyHelp()
 cred = firebase_admin.credentials.Certificate('serviceAccountJ.json')
