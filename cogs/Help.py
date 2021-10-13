@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 
-class About(commands.Cog, description="For more details about contributing and using the Steam Keys Bot. Type `!About`"):
+class Help(commands.Cog, description="For more details about contributing and using the Steam Keys Bot. Type `!help`"):
 
     def __init__(self, client):
         self.client = client
 
     @commands.command(brief='A detailed description of the Steam Keys Bot')
-    async def about(self, ctx):
+    async def help(self, ctx):
         helpText = """**Welcome to the JimRPG Steam Key Depository**
 This area is where Discord members can add/take PC CD keys (games only, no DLC). Please enjoy the games for personal use. They are not for resale as these are member donations. There is a limit of 1 key per person a day.
 
@@ -63,6 +63,6 @@ Report any invalid keys and user that added it, we may contact them to fix any i
         await ctx.send(helpText)
 
 def setup(client):
-    client.add_cog(About(client))
+    client.add_cog(Help(client))
 
 

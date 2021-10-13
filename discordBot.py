@@ -30,8 +30,8 @@ else:
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 client.firestoreDb = db
-client.help_command = MyHelp()
-# client.remove_command('help')
+# client.help_command = MyHelp()
+client.remove_command('help')
 
 
 @client.event
