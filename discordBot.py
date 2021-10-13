@@ -27,7 +27,7 @@ if currUser == "markwong":
     TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604'
     cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
 else:
-    TOKEN = '72a79c49fc2cbddf6a16a70b4e179950d9ae89eb35f1992561198d79bae43897'
+    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA.bixdf6IS_ZOdksHsI8MgbRRmksE'
     cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
