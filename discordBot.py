@@ -1,4 +1,5 @@
 import os
+import pwd
 from MyHelp import MyHelp
 import discord
 from discord.ext import commands
@@ -21,6 +22,8 @@ firebaseConfig = {
 };
 modRole = 'Moderator'
 
+currUser = pwd.getpwuid(os.getuid()).pw_name
+
 initial_extensions = []
 
 intents = discord.Intents.default()
@@ -30,7 +33,11 @@ client = commands.Bot(command_prefix='!',help_command=None)
 client.remove_command('help')
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 # client.help_command = MyHelp()
-cred = firebase_admin.credentials.Certificate('serviceAccountJ.json')
+if currUser == "markwong":
+    cred = firebase_admin.credentials.Certificate('serviceAccountJ.json')
+else:
+    cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
+
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 client.firestoreDb = db
