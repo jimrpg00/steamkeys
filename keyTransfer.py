@@ -3,20 +3,14 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import os.path
+import pwd
 
-firebaseConfig = {
-  "apiKey": "AIzaSyAY7VjY4T1wphjziRQATkzniJRk255W9CA",
-  "authDomain": "steamkeys-discord.firebaseapp.com",
-  "databaseURL": "https://portfolio-e79d0.firebaseio.com",
-  "projectId": "steamkeys-discord",
-  "storageBucket": "steamkeys-discord.appspot.com",
-  "messagingSenderId": "689124544209",
-  "appId": "1:689124544209:web:b045d6cbe27699d20d3ff0",
-  "measurementId": "G-X3THVYCFSP",
-  "serviceAccount": "serviceAccount.json"
-};
-
-cred = firebase_admin.credentials.Certificate('serviceAccount.json')
+currUser = pwd.getpwuid(os.getuid()).pw_name
+if currUser == "markwong":
+    cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
+else:
+    cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
+    
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 file = "keys.txt"
