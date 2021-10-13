@@ -7,21 +7,12 @@ import firebase_admin
 from firebase_admin import firestore
 
 
-
+# discord bot token
 TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604'
-firebaseConfig = {
-  "apiKey": "AIzaSyAY7VjY4T1wphjziRQATkzniJRk255W9CA",
-  "authDomain": "steamkeys-discord.firebaseapp.com",
-  "databaseURL": "https://portfolio-e79d0.firebaseio.com",
-  "projectId": "steamkeys-discord",
-  "storageBucket": "steamkeys-discord.appspot.com",
-  "messagingSenderId": "689124544209",
-  "appId": "1:689124544209:web:b045d6cbe27699d20d3ff0",
-  "measurementId": "G-X3THVYCFSP",
-  "serviceAccount": "serviceAccount.json"
-};
+
 modRole = 'Moderator'
 
+# check user for dev or prod region
 currUser = pwd.getpwuid(os.getuid()).pw_name
 
 initial_extensions = []
@@ -29,18 +20,19 @@ initial_extensions = []
 intents = discord.Intents.default()
 intents.members = True
 
+# initialist bot
 client = commands.Bot(command_prefix='!',help_command=None)
-client.remove_command('help')
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
-# client.help_command = MyHelp()
 if currUser == "markwong":
-    cred = firebase_admin.credentials.Certificate('serviceAccountJ.json')
+    cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
 else:
     cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
-
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 client.firestoreDb = db
+client.help_command = MyHelp()
+# client.remove_command('help')
+
 
 @client.event
 async def on_ready():

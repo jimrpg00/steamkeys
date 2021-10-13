@@ -8,13 +8,14 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
         self.client = client
         self.db = self.client.firestoreDb
 
-    # @commands.command(brief="add a key into the database for others (use DM)")
+    @commands.command(brief="add a key into the database for others (use DM)")
     async def addkey(self, ctx, game_title, platform, region, key):
-            
+        # print(game_title, platform, region, key)
+        print(ctx.message.content)
         #regex to check the format
-        argList = ctx.content.split(' ')
+        argList = ctx.message.content.split(' ')
         # save and remove the command from argList
-        command = argList.pop(0)
+        command = argList.pop(0) # unused
 
         key = argList.pop(-1) # check if key is correct length
         # argList should be stripped down without the command and key
@@ -52,7 +53,7 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
         else:   
             output = f"The key already exists. Please remember to only use valid keys. You may try again and add unique key."
             await ctx.channel.send(output)
-        await ctx.delete()
+        await ctx.message.delete()
 
 def setup(client):
     client.add_cog(AddKey(client))
