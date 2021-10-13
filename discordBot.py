@@ -8,7 +8,7 @@ from firebase_admin import firestore
 
 
 # discord bot token
-TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604'
+
 
 modRole = 'Moderator'
 
@@ -24,8 +24,10 @@ intents.members = True
 client = commands.Bot(command_prefix='!',help_command=None)
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 if currUser == "markwong":
+    TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604'
     cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
 else:
+    TOKEN = '72a79c49fc2cbddf6a16a70b4e179950d9ae89eb35f1992561198d79bae43897'
     cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
