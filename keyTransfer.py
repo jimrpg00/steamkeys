@@ -18,10 +18,10 @@ if not os.path.exists(file):
     print("File does not exist")
 
 def addKey(gameSplit):
-    uppercaseGameTitle = gameSplit[0].upper()
+    gameTitle = gameSplit[0]
     key = gameSplit[1]
-
-    key_doc = db.collection(uppercaseGameTitle).document(key)
+    # key_doc = db.collection(uppercaseGameTitle).document(key)
+    key_doc = db.collection("game_list").document(gameTitle).collection("keys").document(key)
     doc = key_doc.get()
     if not doc.exists:
         # add key
@@ -29,8 +29,28 @@ def addKey(gameSplit):
             "key" : key,
             "user" : "JimRPG"
         })
-        db.collection("game_list").document(f'{uppercaseGameTitle}').set({"exists" : 1})
-    pass
+        db.collection("game_list").document(f'{gameTitle}').set({"exists" : 1})
+
+def delete_in_batch():
+    print('Deleting documents in batch')
+    # now = time()
+    # docs = db.collection(u'users').where(u'expires_at', u'<=', int(now)).stream()
+    # batch = db.batch()
+    # counter = 0
+    # for doc in docs:
+    #     counter = counter + 1
+    #     if counter % 500 == 0:
+    #         batch.commit()
+    #     batch.delete(doc.reference)
+    # batch.commit()
+
+    doc_refs = db.collection('game_list').stream()
+    batch = db.batch()
+    appendedGamesStr = ""
+
+    for doc in doc_refs:
+        batch.delete(doc.reference)
+    batch.commit()
 
 with open(file, 'r') as fp:
     while True:
@@ -42,6 +62,3 @@ with open(file, 'r') as fp:
         else:
             print("EOF")
             break
-    
-
-

@@ -14,15 +14,20 @@ class RequestKey(commands.Cog):
         commandArr = ctx.content.split(' ')
         commandArr.pop(0)
         gameTitle = ' '.join(commandArr)
-        uppercaseGameTitle = gameTitle.upper()
-        availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+        # uppercaseGameTitle = gameTitle.upper()
+        # availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+        availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
         if len(list(availableKey_docs)) != 0:
-            availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+            # need to redeclare because len() and list() destroys the availableKey_docs variable above
+            # availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+            availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
+
             gameKey = list(availableKey_docs)[0].id
             
             # User checks
-            userGame_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{uppercaseGameTitle}').stream()
+            # userGame_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{uppercaseGameTitle}').stream()
+            userGame_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{gameTitle}').stream()
             numberOfKeys = len(list(userGame_refs))
 
             # get user date fields
@@ -58,7 +63,8 @@ class RequestKey(commands.Cog):
                 })
                 logging.info(f'{gameKey} successfully added to {ctx.author.id}')
 
-                self.db.collection(uppercaseGameTitle).document(f'{gameKey}').delete()
+                # self.db.collection(uppercaseGameTitle).document(f'{gameKey}').delete()
+                self.db.collection(gameTitle).document(f'{gameKey}').delete()
                 logging.info(f'{gameKey} successfully deleted')
                 await ctx.channel.send(f'Congrats {ctx.author.name}, check your DM for the key!')
                 await ctx.author.send(f'Your game key for {gameTitle} is {gameKey}. Enjoy!')

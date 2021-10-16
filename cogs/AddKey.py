@@ -26,9 +26,7 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
 
         gameTitle = ' '.join(argList)
 
-        uppercaseGameTitle = gameTitle.upper()
-
-        key_doc = self.db.collection(uppercaseGameTitle).document(key)
+        key_doc = self.db.collection("game_list").document(gameTitle).collection("keys").document(key)
         doc = key_doc.get()
         if not doc.exists:
             # add key
@@ -45,7 +43,7 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
             })
 
             # add key to game list
-            self.db.collection("game_list").document(f'{uppercaseGameTitle}').set({"exists" : 1})
+            self.db.collection("game_list").document(gameTitle).collection("keys").document(key).set({"exists" : 1})
 
 
             output = f"Thanks for giving back to the community {ctx.author.name}. {gameTitle} key was received for another."

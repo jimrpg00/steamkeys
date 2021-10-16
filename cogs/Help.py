@@ -67,5 +67,3 @@ Report any invalid keys and user that added it, we may contact them to fix any i
 
 def setup(client):
     client.add_cog(Help(client))
-
-
