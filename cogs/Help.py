@@ -12,8 +12,11 @@ class Help(commands.Cog, description="For more details about contributing and us
 This area is where Discord members can add/take PC CD keys (games only, no DLC). Please enjoy the games for personal use. They are not for resale as these are member donations. There is a limit of 1 key per person a day.
 
 **1. Commands**
-!help - for a list of commands
-!help <command> - for more details on usage
+!help - this help message 
+!listgames - lists available games with valid keys 
+!listmygames - lists games you have already acquired 
+!addkey “Game Name” “CD Key”– add a key into the database for others
+!requestkey “game name” - grants a free and valid key
 
 **2. Adding CD keys**
 When adding keys, create a DM so the key is not revealed in the thread. (direct message SteamKeysBot by right clicking on the name in the member list).
