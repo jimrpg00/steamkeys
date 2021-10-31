@@ -10,7 +10,7 @@ class ListGames(commands.Cog, description="Shows the entire list of games with v
 
     @commands.command(brief="Lists available games with valid keys")
     async def listgames(self, ctx):
-        if "steam-keys" == str(self.client.get_channel(880273688052772874)):
+        if "steam-keys" == str(self.client.get_channel(880273688052772874)) or "🔑-steam-keys" == str(self.client.get_channel(898977014139199568)):
             doc_refs = self.db.collection('game_list').stream()
             appendedGamesStr = ""
 
