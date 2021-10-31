@@ -15,7 +15,6 @@ class RequestKey(commands.Cog):
     async def requestkey(self, ctx):
         commandArr = ctx.message.content.split(' ')
         commandArr.pop(0) # command - !requestkey
-        commandArr.pop(-1) # game key
         gameTitle = ' '.join(commandArr)
         print(gameTitle)
 
