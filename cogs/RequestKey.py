@@ -19,20 +19,37 @@ class RequestKey(commands.Cog):
         print(gameTitle)
 
         # uppercaseGameTitle = gameTitle.upper()
-        # availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+
         availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
         if len(list(availableKey_docs)) != 0:
             # need to redeclare because len() and list() destroys the availableKey_docs variable above
-            # availableKey_docs = self.db.collection(uppercaseGameTitle).limit(1).stream()
+
             availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
             gameKey = list(availableKey_docs)[0].id
             
             # User checks
-            # userGame_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{uppercaseGameTitle}').stream()
-            userGame_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{gameTitle}').stream()
+            user = self.db.collection("user").document(f"{ctx.author.id}").get()
+            if user.exists:
+                print("exists")
+            else:
+                print("does not")
+                newUser = self.db.collection("user").document(f"{ctx.author.id}")
+                newUser.set({
+                    "name" : ctx.author.name,
+                    "date" : datetime.datetime.now().replace(tzinfo=None),
+                    "keyLimit" : 0
+                })
+
+            userGame_refs = self.db.collection('user').document(f"{ctx.author.id}").collection(f'{gameTitle}').stream()
             numberOfKeys = len(list(userGame_refs))
+            
+            # user_doc = self.db.collection("user").document(f"{ctx.author.id}").collection(gameTitle).document(key)
+            # user_doc.set({
+            #     "key" : key,
+            #     "user" : ctx.author.name,
+            # })
 
             # get user date fields
             user_doc = self.db.collection('user').document(str(ctx.author.id))
