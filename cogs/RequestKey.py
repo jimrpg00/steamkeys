@@ -9,7 +9,7 @@ class RequestKey(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.db = self.client.firestoreDb
-        self.keyLimit = 5
+        self.keyLimit = 1
 
     @commands.command(brief="Grants a free and valid key")
     async def requestkey(self, ctx):
