@@ -25,26 +25,28 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
             return 
 
         gameTitle = ' '.join(argList)
-
+        
+        
         key_doc = self.db.collection("game_list").document(gameTitle).collection("keys").document(key)
         doc = key_doc.get()
+        
+        #check if key already exists within the game
         if not doc.exists:
-            # add key
+            # add exists field to game
+            self.db.collection("game_list").document(gameTitle).set({"exists": 1})
+
+            # add key to game
             key_doc.set({
                 "key" : key,
                 "user" : ctx.author.name
             })
 
             # add key to user's profile
-            user_doc = self.db.collection("user").document(f"{ctx.author.id}").collection(uppercaseGameTitle).document(key)
+            user_doc = self.db.collection("user").document(f"{ctx.author.id}").collection(gameTitle).document(key)
             user_doc.set({
                 "key" : key,
                 "user" : ctx.author.name,
             })
-
-            # add key to game list
-            self.db.collection("game_list").document(gameTitle).collection("keys").document(key).set({"exists" : 1})
-
 
             output = f"Thanks for giving back to the community {ctx.author.name}. {gameTitle} key was received for another."
             await ctx.channel.send(output)
