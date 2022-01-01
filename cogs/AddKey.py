@@ -95,7 +95,7 @@ Others: label as needed""")
         # join remaining words together
         gameTitle = ' '.join(args)
         # reformat title
-        gameTitle = f"{gameTitle} [{platform}] [{region}]"
+        gameTitle = f"{gameTitle} {platform} {region}"
 
         # ensure the key is correct otherwise warn the user and exit early
         match = re.search("([a-zA-Z0-9]){3,}-{1}", key) # regex matches AAAAA-12345-C3A3F, most keys are expected to have this format

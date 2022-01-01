@@ -19,9 +19,9 @@ class ListMyGames(commands.Cog):
             for game in keys_refs:
                 appendedGamesStr = appendedGamesStr + (f'{game.id}\n')
             if appendedGamesStr:
-                await ctx.channel.send(f"""```{appendedGamesStr}```""")
+                await ctx.author.send(f"""```{appendedGamesStr}```""")
             else:
-                await ctx.channel.send("There are currently no games in your list.")
+                await ctx.author.send("One moment, grabbing a list of games.")
 
 def setup(client):
     client.add_cog(ListMyGames(client))
