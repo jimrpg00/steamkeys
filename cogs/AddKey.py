@@ -117,7 +117,7 @@ Others: label as needed""")
                 "user" : ctx.author.name
             })
 
-            # add key to user's profile
+            # add key to user's profile as a game they've contributed
             user_doc = self.db.collection("user").document(f"{ctx.author.id}").collection(gameTitle).document(key)
             user_doc.set({
                 "key" : key,

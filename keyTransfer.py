@@ -18,7 +18,7 @@ if not os.path.exists(file):
     print("File does not exist")
 
 def addKey(gameSplit):
-    gameTitle = gameSplit[0]
+    gameTitle = gameSplit[0] + " [Steam]" + " [ROW]"
     key = gameSplit[1]
     # key_doc = db.collection(uppercaseGameTitle).document(key)
     key_doc = db.collection("game_list").document(gameTitle).collection("keys").document(key)
@@ -52,6 +52,7 @@ def delete_in_batch():
         batch.delete(doc.reference)
     batch.commit()
 
+# use this to add keys as the base set of keys
 with open(file, 'r') as fp:
     while True:
         game = fp.readline()
@@ -62,3 +63,6 @@ with open(file, 'r') as fp:
         else:
             print("EOF")
             break
+
+# uncomment this line to wipe everything
+# delete_in_batch()
