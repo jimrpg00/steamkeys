@@ -25,13 +25,13 @@ client = commands.Bot(command_prefix='!',help_command=None)
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 if currUser == "markwong":
     # test server 
-    TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604'
+    TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604' #discord bot token
     cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
     client.staticChannel = 880273688052772874
     client.staticChannelStr = "steam-keys"
 else:
     # live prod server - JimRpg
-    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA.bixdf6IS_ZOdksHsI8MgbRRmksE'
+    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA.bixdf6IS_ZOdksHsI8MgbRRmksE' #discord bot token
     cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
     client.staticChannel = 898977014139199568
     client.staticChannelStr = "🔑-steam-keys"

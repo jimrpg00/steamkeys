@@ -1,5 +1,6 @@
 import logging
 import datetime
+import re
 import discord
 from discord.ext import commands
 from firebase_admin import firestore
@@ -13,12 +14,32 @@ class RequestKey(commands.Cog):
 
     @commands.command(brief="Grants a free and valid key")
     async def requestkey(self, ctx):
-        commandArr = ctx.message.content.split(' ')
-        commandArr.pop(0) # command - !requestkey
-        gameTitle = ' '.join(commandArr)
-        print(gameTitle)
+        
+        #regex to check the format
+        my_regex = re.compile(r'\[([^][]+)\]')
+        args = my_regex.findall(ctx.message.content)
+        if len(args) != 3:
+            await ctx.channel.send("**A parameter is missing.** Check what was entered and use the following format i.e. !addkey [GameTitle] [Platform] [Region] key")
+            await ctx.channel.send("""Use on of the following for the region
+US: US
+Europe: EU
+AS: Asia
+ME: Middle East
+ROW: Rest of World
+ex. = except""")
+            await ctx.channel.send("""Use one of the following for the platform
+Steam: Steam
+Origin: EA Origin
+Uplay: Ubisoft Uplay
+Epic: Epic Games
+GOG: GOG
+Rockstar: Rockstar
+Others: label as needed""")
+            return
 
-        # uppercaseGameTitle = gameTitle.upper()
+        # region = args.pop(-1)
+        # platform = args.pop(-1)  
+        gameTitle = ' '.join(args)  
 
         availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
@@ -28,13 +49,12 @@ class RequestKey(commands.Cog):
             availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
             gameKey = list(availableKey_docs)[0].id
-            
+            strippedSpaces = f'{gameKey}'.strip()
             # User checks
             user = self.db.collection("user").document(f"{ctx.author.id}").get()
-            if user.exists:
-                print("exists")
-            else:
-                print("does not")
+            print(user)
+            if not user.exists:
+                print("User doesn't exists, adding...")
                 newUser = self.db.collection("user").document(f"{ctx.author.id}")
                 newUser.set({
                     "name" : ctx.author.name,
@@ -92,19 +112,18 @@ class RequestKey(commands.Cog):
                     "rating" : firestore.Increment(1) # INCREMENT RATING
                 })
                 
-                user_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{gameTitle}').document(f'{gameKey}')
+                user_refs = self.db.collection('user').document(str(ctx.author.id)).collection(f'{gameTitle}').document(f'{strippedSpaces}')
                 user_refs.set({
-                    "key" : gameKey
+                    "key" : strippedSpaces
                 })
-                logging.info(f'{gameKey} successfully added to {ctx.author.id}')
-
-                # turn back on
-                self.db.collection("game_list").document(gameTitle).collection("keys").document(f'{gameKey}').delete()
-                logging.info(f'{gameKey} successfully deleted and taken')
-                await ctx.channel.send(f'Congrats {ctx.author.name}, check your DM for the key!')
-                await ctx.author.send(f'Your game key for {gameTitle} is {gameKey}. Enjoy!')
+                logging.info(f'{strippedSpaces} successfully added to {ctx.author.id}')
+                
+                self.db.collection("game_list").document(gameTitle).collection("keys").document(f'{strippedSpaces}').delete()
+                logging.info(f'{strippedSpaces} successfully deleted and taken')
+                await ctx.channel.send(f'Congrats {ctx.author.name}, check your DM for the key!\n') #send into main channel if user is asking from main channel
+                await ctx.author.send(f'Your game key for {gameTitle} is {strippedSpaces}. Enjoy!') #dm key to keep it hidden from othe users
             else:
-                await ctx.author.send(f'To keep the community fair, a limit of 5 keys is applied per user. This allows other users in the community have a fair chance of enjoying the game.')
+                await ctx.author.send(f'A limit of 5 keys is applied per user. This allows other users in the community have a fair chance of enjoying the game.')
         else:
             await ctx.channel.send(f'Hello, unfortunately there are no keys available for {gameTitle}.')
 
