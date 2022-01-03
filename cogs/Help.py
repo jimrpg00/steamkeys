@@ -8,7 +8,7 @@ class Help(commands.Cog, description="For more details about contributing and us
 
     @commands.command(brief='A detailed description of the Steam Keys Bot')
     async def help(self, ctx):
-        helpText = """**Welcome to the JimRPG Steam Key Depository**
+        await ctx.author.send("""**Welcome to the JimRPG Steam Key Depository**
 This area is where Discord members can add/take PC CD keys (games only, no DLC). Please enjoy the games for personal use. They are not for resale as these are member donations. There is a limit of 1 key per person a day.
 
 **1. Commands**
@@ -38,10 +38,8 @@ GOG: GOG
 Rockstar: Rockstar
 Others: label as needed
 
-
-"""
-        await ctx.send(helpText)
-        await ctx.send("""**2.2 Region Differentiation**
+""")
+        await ctx.author.send("""**2.2 Region Differentiation**
 Please add a region (with square brackets) if you know the key is for a specific region. If its region free, leave empty.
 e.g. !addkey [Battlefield V] [Origin] [AS] [AAAA-BBBB-CCCC-DDDD-EEEE]
 (This is a Battlefield V key for Origin in the Asia region)

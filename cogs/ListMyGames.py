@@ -21,7 +21,7 @@ class ListMyGames(commands.Cog):
             if appendedGamesStr:
                 await ctx.author.send(f"""```{appendedGamesStr}```""")
             else:
-                await ctx.author.send("One moment, grabbing a list of games.")
+                await ctx.author.send("One moment, grabbing your list of games.")
 
 def setup(client):
     client.add_cog(ListMyGames(client))

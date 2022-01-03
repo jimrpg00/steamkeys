@@ -38,9 +38,10 @@ class RequestKey(commands.Cog):
 #             return
 
         # region = args.pop(-1)
-        # platform = args.pop(-1)  
-        gameTitle = ctx.message.content
-        gameTitle = ' '.join(ctx.message.content)  
+        # platform = args.pop(-1)
+        args = ctx.message.content.split(" ")
+        cmd = args.pop(0)
+        gameTitle = ' '.join(args) # what remains is the game title
 
         availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 
@@ -90,9 +91,8 @@ class RequestKey(commands.Cog):
                 if daySince >= 1:
                     user_doc.update({
                         "keyLimit" : 0,                        
-                })
+                    })
                 if daySince >= 1 or userKeyLimit < self.keyLimit:
-                    
                     user_doc.update({
                         "keyLimit" : firestore.Increment(1), # INCREMENT RATING
                         "date" : datetime.datetime.now().replace(tzinfo=None)
@@ -121,7 +121,7 @@ class RequestKey(commands.Cog):
                 
                 self.db.collection("game_list").document(gameTitle).collection("keys").document(f'{strippedSpaces}').delete()
                 logging.info(f'{strippedSpaces} successfully deleted and taken')
-                await ctx.channel.send(f'Congrats {ctx.author.name}, check your DM for the key!\n') #send into main channel if user is asking from main channel
+                await ctx.author.send(f'Congrats {ctx.author.name}, check your DM for the key!\n') #send into main channel if user is asking from main channel
                 await ctx.author.send(f'Your game key for {gameTitle} is {strippedSpaces}. Enjoy!') #dm key to keep it hidden from othe users
             else:
                 await ctx.author.send(f'A limit of 5 keys is applied per user. This allows other users in the community have a fair chance of enjoying the game.')
