@@ -15,30 +15,6 @@ class RequestKey(commands.Cog):
     @commands.command(brief="Grants a free and valid key")
     async def requestkey(self, ctx):
         
-        #regex to check the format
-#         my_regex = re.compile(r'\[([^][]+)\]')
-#         args = my_regex.findall(ctx.message.content)
-#         if len(args) != 3:
-#             await ctx.channel.send("**A parameter is missing.** Check what was entered and use the following format i.e. !addkey [GameTitle] [Platform] [Region] key")
-#             await ctx.channel.send("""Use on of the following for the region
-# US: US
-# Europe: EU
-# AS: Asia
-# ME: Middle East
-# ROW: Rest of World
-# ex. = except""")
-#             await ctx.channel.send("""Use one of the following for the platform
-# Steam: Steam
-# Origin: EA Origin
-# Uplay: Ubisoft Uplay
-# Epic: Epic Games
-# GOG: GOG
-# Rockstar: Rockstar
-# Others: label as needed""")
-#             return
-
-        # region = args.pop(-1)
-        # platform = args.pop(-1)
         args = ctx.message.content.split(" ")
         cmd = args.pop(0)
         gameTitle = ' '.join(args) # what remains is the game title
