@@ -10,7 +10,7 @@ class RequestKey(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.db = self.client.firestoreDb
-        self.keyLimit = 1
+        self.keyLimit = 5
 
     @commands.command(brief="Grants a free and valid key")
     async def requestkey(self, ctx):
@@ -126,7 +126,7 @@ class RequestKey(commands.Cog):
             else:
                 await ctx.author.send(f'A limit of 5 keys is applied per user. This allows other users in the community have a fair chance of enjoying the game.')
         else:
-            await ctx.channel.send(f'Hello, unfortunately there are no keys available for {gameTitle}.')
+            await ctx.author.send(f'Hello, unfortunately there are no keys available for {gameTitle}.')
 
 def setup(client):
     client.add_cog(RequestKey(client))

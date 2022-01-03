@@ -30,38 +30,38 @@ Please add a platform (with square brackets).
 e.g. !addkey [Battlefield V] [Origin] [ROW] AAAA-BBBB-CCCC-DDDD-EEEE
 
 **Platforms:**
-Steam: Steam
-Origin: EA Origin
-Uplay: Ubisoft Uplay
-Epic: Epic Games
-GOG: GOG
-Rockstar: Rockstar
-Others: label as needed
+Steam - Steam
+Origin - EA Origin
+Uplay - Ubisoft Uplay
+Epic - Epic Games
+GOG - GOG
+Rockstar - Rockstar
+Others - label as needed
 
 """)
         await ctx.author.send("""**2.2 Region Differentiation**
 Please add a region (with square brackets) if you know the key is for a specific region. If its region free, leave empty.
-e.g. !addkey [Battlefield V] [Origin] [AS] [AAAA-BBBB-CCCC-DDDD-EEEE]
+e.g. !addkey Battlefield V Origin AS AAAA-BBBB-CCCC-DDDD-EEEE
 (This is a Battlefield V key for Origin in the Asia region)
 or
-e.g. !addkey [Red Dead Redemption 2] [ROW ex. Japan] [AAAAA-BBBBB-CCCCC]
+e.g. !addkey Red Dead Redemption 2 ROW ex. Japan AAAAA-BBBBB-CCCCC
 (This is a RDR2 key for Steam for rest of world except Japan)
 
 **Regions:**
-US: US
-Europe: EU
-AS: Asia
-ME: Middle East
-RF: Region Free
-ROW: Rest of World
+US - US
+Europe - EU
+AS - Asia
+ME - Middle East
+RF - Region Free
+ROW - Rest of World
 ex. = except
 
 **3. Taking CD Keys**
 When taking keys, request the key in the thread. SteamKeysBot will direct message you the key.
 
 The command to use is –
-!requestkey [Game Name] [Platform] [Region]
-e.g. !requestkey [Battlefield V] [Origin] [EU]
+!requestkey Game Name Platform Region
+e.g. !requestkey Battlefield V Origin EU
 
 **4. Invalid Keys**
 Report any invalid keys and user that added it, we may contact them to fix any issues. Do not add back in DB.""")
