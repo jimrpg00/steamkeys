@@ -52,6 +52,7 @@ US: US
 Europe: EU
 AS: Asia
 ME: Middle East
+RF: Region Free
 ROW: Rest of World
 ex. = except
 

@@ -18,7 +18,7 @@ if not os.path.exists(file):
     print("File does not exist")
 
 def addKey(gameSplit):
-    gameTitle = gameSplit[0] + " Steam" + " ROW"
+    gameTitle = gameSplit[0]
     key = gameSplit[1]
     # key_doc = db.collection(uppercaseGameTitle).document(key)
     key_doc = db.collection("game_list").document(gameTitle).collection("keys").document(key)
