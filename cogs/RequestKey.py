@@ -97,7 +97,7 @@ class RequestKey(commands.Cog):
                 
                 self.db.collection("game_list").document(gameTitle).collection("keys").document(f'{strippedSpaces}').delete()
                 logging.info(f'{strippedSpaces} successfully deleted and taken')
-                await ctx.author.send(f'Congrats {ctx.author.name}, check your DM for the key!\n') #send into main channel if user is asking from main channel
+                await ctx.channel.send(f'Congrats {ctx.author.name}, check your DM for the key!\n') #send into main channel if user is asking from main channel
                 await ctx.author.send(f'Your game key for {gameTitle} is {strippedSpaces}. Enjoy!') #dm key to keep it hidden from othe users
             else:
                 await ctx.author.send(f'A limit of 5 keys is applied per user. This allows other users in the community have a fair chance of enjoying the game.')

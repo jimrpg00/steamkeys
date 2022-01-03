@@ -8,26 +8,33 @@ class Help(commands.Cog, description="For more details about contributing and us
 
     @commands.command(brief='A detailed description of the Steam Keys Bot')
     async def help(self, ctx):
-        await ctx.author.send("""**Welcome to the JimRPG Steam Key Depository**
+        await ctx.author.send("""**1. Commands**
+!help - this help message 
+!listgames - lists available games with valid keys 
+!listmygames - lists games you have already acquired 
+!addkey Game Name [Platform Region] Key – add a key into the database for others.
+!requestkey Game Name Platform Region - grants a free and valid key
+""")
+        await ctx.channel.send("""**Welcome to the JimRPG Steam Key Depository**
 This area is where Discord members can add/take PC CD keys (games only, no DLC). Please enjoy the games for personal use. They are not for resale as these are member donations. There is a limit of 1 key per person a day.
 
 **1. Commands**
 !help - this help message 
 !listgames - lists available games with valid keys 
 !listmygames - lists games you have already acquired 
-!addkey [Game Name] [Platform] [Region] [Key]– add a key into the database for others.
-!requestkey [Game Name] [Platform] [Region] - grants a free and valid key
+!addkey Game Name [Platform Region] Key – add a key into the database for others.
+!requestkey Game Name Platform Region - grants a free and valid key
 
 **2. Adding CD keys**
 When adding keys, create a DM so the key is not revealed in the thread. (direct message SteamKeysBot by right clicking on the name in the member list).
 
 The command to use is –
 !addkey “Game Name” “CD Key”
-e.g. !addkey [Battlefield V] AAAAA-BBBBB-CCCCC
+e.g. !addkey Battlefield V AAAAA-BBBBB-CCCCC
 
 **2.1 Platform Differentiation**
 Please add a platform (with square brackets).
-e.g. !addkey [Battlefield V] [Origin] [ROW] AAAA-BBBB-CCCC-DDDD-EEEE
+e.g. !addkey Battlefield V [Origin ROW] AAAA-BBBB-CCCC-DDDD-EEEE
 
 **Platforms:**
 Steam - Steam
@@ -41,10 +48,10 @@ Others - label as needed
 """)
         await ctx.author.send("""**2.2 Region Differentiation**
 Please add a region (with square brackets) if you know the key is for a specific region. If its region free, leave empty.
-e.g. !addkey Battlefield V Origin AS AAAA-BBBB-CCCC-DDDD-EEEE
+e.g. !addkey Battlefield V [Origin AS] AAAA-BBBB-CCCC-DDDD-EEEE
 (This is a Battlefield V key for Origin in the Asia region)
 or
-e.g. !addkey Red Dead Redemption 2 ROW ex. Japan AAAAA-BBBBB-CCCCC
+e.g. !addkey Red Dead Redemption 2 [ROW ex. Japan] AAAAA-BBBBB-CCCCC
 (This is a RDR2 key for Steam for rest of world except Japan)
 
 **Regions:**
