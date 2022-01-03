@@ -8,13 +8,6 @@ class Help(commands.Cog, description="For more details about contributing and us
 
     @commands.command(brief='A detailed description of the Steam Keys Bot')
     async def help(self, ctx):
-        await ctx.author.send("""**1. Commands**
-!help - this help message 
-!listgames - lists available games with valid keys 
-!listmygames - lists games you have already acquired 
-!addkey Game Name [Platform Region] Key – add a key into the database for others.
-!requestkey Game Name Platform Region - grants a free and valid key
-""")
         await ctx.channel.send("""**Welcome to the JimRPG Steam Key Depository**
 This area is where Discord members can add/take PC CD keys (games only, no DLC). Please enjoy the games for personal use. They are not for resale as these are member donations. There is a limit of 1 key per person a day.
 
