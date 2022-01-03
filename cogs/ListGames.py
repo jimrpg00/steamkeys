@@ -25,11 +25,11 @@ class ListGames(commands.Cog, description="Shows the entire list of games with v
                 # formattedTitle = doc.id.capitalize()
                 appendedGamesStr = appendedGamesStr + (f'{gameTitle}\n')
                 if appendedGamesStr and idx % 50 == 0 and idx != 0:
-                    await ctx.author.send(f"""```{appendedGamesStr}```""")
+                    await ctx.channel.send(f"""```{appendedGamesStr}```""")
                     appendedGamesStr = ""
                 
             if appendedGamesStr:
-                await ctx.author.send(f"""```{appendedGamesStr}```""")
+                await ctx.channel.send(f"""```{appendedGamesStr}```""")
                 
 def setup(client):
     client.add_cog(ListGames(client))
