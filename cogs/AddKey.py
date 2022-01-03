@@ -16,6 +16,7 @@ class AddKey(commands.Cog, description="When adding keys, create a DM so the key
             "Steam",
         }
         self.regions = {
+            "RF",
             "US",
             "EU",
             "AS",

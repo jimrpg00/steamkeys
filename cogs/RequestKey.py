@@ -16,30 +16,31 @@ class RequestKey(commands.Cog):
     async def requestkey(self, ctx):
         
         #regex to check the format
-        my_regex = re.compile(r'\[([^][]+)\]')
-        args = my_regex.findall(ctx.message.content)
-        if len(args) != 3:
-            await ctx.channel.send("**A parameter is missing.** Check what was entered and use the following format i.e. !addkey [GameTitle] [Platform] [Region] key")
-            await ctx.channel.send("""Use on of the following for the region
-US: US
-Europe: EU
-AS: Asia
-ME: Middle East
-ROW: Rest of World
-ex. = except""")
-            await ctx.channel.send("""Use one of the following for the platform
-Steam: Steam
-Origin: EA Origin
-Uplay: Ubisoft Uplay
-Epic: Epic Games
-GOG: GOG
-Rockstar: Rockstar
-Others: label as needed""")
-            return
+#         my_regex = re.compile(r'\[([^][]+)\]')
+#         args = my_regex.findall(ctx.message.content)
+#         if len(args) != 3:
+#             await ctx.channel.send("**A parameter is missing.** Check what was entered and use the following format i.e. !addkey [GameTitle] [Platform] [Region] key")
+#             await ctx.channel.send("""Use on of the following for the region
+# US: US
+# Europe: EU
+# AS: Asia
+# ME: Middle East
+# ROW: Rest of World
+# ex. = except""")
+#             await ctx.channel.send("""Use one of the following for the platform
+# Steam: Steam
+# Origin: EA Origin
+# Uplay: Ubisoft Uplay
+# Epic: Epic Games
+# GOG: GOG
+# Rockstar: Rockstar
+# Others: label as needed""")
+#             return
 
         # region = args.pop(-1)
         # platform = args.pop(-1)  
-        gameTitle = ' '.join(args)  
+        gameTitle = ctx.message.content
+        gameTitle = ' '.join(ctx.message.content)  
 
         availableKey_docs = self.db.collection("game_list").document(gameTitle).collection("keys").limit(1).stream()
 

@@ -31,6 +31,18 @@ def addKey(gameSplit):
         })
         db.collection("game_list").document(f'{gameTitle}').set({"exists" : 1})
 
+def addGames():
+    with open(file, 'r') as fp:
+        while True:
+            game = fp.readline()
+            if game:
+                gameSplit = game.split("|")
+                print(gameSplit[0])
+                addKey(gameSplit)
+            else:
+                print("EOF")
+                break
+
 def delete_in_batch():
     print('Deleting documents in batch')
     # now = time()
@@ -53,16 +65,7 @@ def delete_in_batch():
     batch.commit()
 
 # use this to add keys as the base set of keys
-with open(file, 'r') as fp:
-    while True:
-        game = fp.readline()
-        if game:
-            gameSplit = game.split("|")
-            print(gameSplit[0])
-            addKey(gameSplit)
-        else:
-            print("EOF")
-            break
+addGames()
 
 # uncomment this line to wipe everything
 # delete_in_batch()
