@@ -8,8 +8,6 @@ from firebase_admin import firestore
 
 
 # discord bot token
-
-
 modRole = 'Moderator'
 
 # check user for dev or prod region
