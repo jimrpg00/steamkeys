@@ -5,11 +5,14 @@ from firebase_admin import firestore
 import os.path
 import pwd
 
+# check whether the current system is development.
 currUser = pwd.getpwuid(os.getuid()).pw_name
 if currUser == "markwong":
-    cred = firebase_admin.credentials.Certificate('serviceAccountD.json')
+    # use development credentials
+    cred = firebase_admin.credentials.Certificate('../serviceAccountD.json')
 else:
-    cred = firebase_admin.credentials.Certificate('serviceAccountP.json')
+    # use production credentials
+    cred = firebase_admin.credentials.Certificate('../serviceAccountP.json')
     
 firebase_admin.initialize_app(cred)
 db = firestore.client()
@@ -43,29 +46,5 @@ def addGames():
                 print("EOF")
                 break
 
-def delete_in_batch():
-    print('Deleting documents in batch')
-    # now = time()
-    # docs = db.collection(u'users').where(u'expires_at', u'<=', int(now)).stream()
-    # batch = db.batch()
-    # counter = 0
-    # for doc in docs:
-    #     counter = counter + 1
-    #     if counter % 500 == 0:
-    #         batch.commit()
-    #     batch.delete(doc.reference)
-    # batch.commit()
-
-    doc_refs = db.collection('game_list').stream()
-    batch = db.batch()
-    appendedGamesStr = ""
-
-    for doc in doc_refs:
-        batch.delete(doc.reference)
-    batch.commit()
-
-# use this to add keys as the base set of keys
 addGames()
 
-# uncomment this line to wipe everything
-# delete_in_batch()
