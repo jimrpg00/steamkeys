@@ -6,6 +6,8 @@ Steam Keys is a game key exchange program. It operates on users donating spare c
 
 Built using Python 3 programming language, using Discord/Discord Bot API as the medium for users to interact and FireStore (Google) as the realtime database/persistent store for the keys. All these platforms are free to use with the exception of FireStore which bases it's free tier on usage which is up to the owner or developer to consider and build logic or database rules to avoid these additional charges.
 
+
+
 # Accompanying Tools
 Under the tools folder, use the `addKeys.py` or `deleteKeys.py`. Use these tools once you've set up the Firestore database and setup your credentials
 
