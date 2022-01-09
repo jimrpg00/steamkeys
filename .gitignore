@@ -3,3 +3,4 @@
 *.json
 botToken.py
 /aws
+/tools/keys.txt
