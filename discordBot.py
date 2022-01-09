@@ -29,7 +29,7 @@ if currUser == "markwong": # replace with your name or a new detection for your 
     client.staticChannelStr = "steam-keys"
 else:
     # live prod server - JimRpg
-    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA.bixdf6IS_ZOdksHsI8MgbRRmksE'
+    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA._ZnPCj37eeZddmMJRThEEvLq_A8'
     serviceJson = 'serviceAccountP.json'
     client.staticChannel = 898977014139199568
     client.staticChannelStr = "🔑-steam-keys"

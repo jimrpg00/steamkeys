@@ -1,4 +1,3 @@
 *.out
 **/__pycache__
-serviceAccountD.json
-serviceAccountP.json
+*.json
