@@ -1,5 +1,6 @@
 import os
 import pwd
+import botToken
 from MyHelp import MyHelp
 import discord
 from discord.ext import commands
@@ -23,13 +24,13 @@ client = commands.Bot(command_prefix='!',help_command=None)
 client._BotBase__cogs  = commands.core._CaseInsensitiveDict()
 if currUser == "markwong": # replace with your name or a new detection for your development machine
     # test server 
-    TOKEN = 'ODgxNTM2OTY5Mzc5ODQwMTEw.YSuRRw.WfJMItxoL0lcKxRv7jAedcwv604' # discord bot token
+    BOT_TOKEN =  botToken.DEV_TOKEN# discord bot token
     serviceJson = 'serviceAccountD.json'
     client.staticChannel = 880273688052772874
     client.staticChannelStr = "steam-keys"
 else:
     # live prod server - JimRpg
-    TOKEN = 'ODk3ODIyOTY3Mjk0MTk3ODEw.YWbQzA._ZnPCj37eeZddmMJRThEEvLq_A8'
+    BOT_TOKEN = botToken.PROD_TOKEN
     serviceJson = 'serviceAccountP.json'
     client.staticChannel = 898977014139199568
     client.staticChannelStr = "🔑-steam-keys"
@@ -68,4 +69,4 @@ for filename in os.listdir('./cogs'):
 for extension in initial_extensions:
     client.load_extension(extension)
 
-client.run(TOKEN)
+client.run(BOT_TOKEN)
